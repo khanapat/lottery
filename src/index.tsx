@@ -4,9 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import Subscribe from './Subscribe';
+import { Provider } from 'react-redux';
+import { store } from "./state";
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <Providers> */}
+    <Provider store={store}>
+      <Subscribe>
+        <App />
+      </Subscribe>
+    </Provider>
+    {/* </Providers> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
