@@ -9,7 +9,11 @@ type TProps = {
 const Address = ({ text }: TProps) => (
     <AddrStyle>
         {text ? text : ""}
-        <FaReg text={text ? text : ""} />
+        <FaReg
+            mainText={text ? text : ""}
+            initToolTipText="Copy address to clipboard"
+            finishToolTipText="Copied"
+        />
     </AddrStyle>
 );
 

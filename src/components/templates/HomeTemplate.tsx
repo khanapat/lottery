@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "../atoms";
 import { Address } from "../molecules";
 import { Navbar } from "../organisms";
+import { ToastContainer } from "react-toastify";
 
 type TProps = {
     headerProps: {
@@ -27,6 +28,7 @@ const HomeTemplate = ({ headerProps }: TProps) => (
         {/* {headerProps.chainId} */}
         <Address text={headerProps.account} />
         {/* <FaRegCopy /> */}
+        <ToastContainer />
     </div>
 );
 

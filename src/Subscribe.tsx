@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { supportedChainIds } from "./config/constants.ts/network";
+import useToast from "./hooks/useToast";
 // import { RootState } from "./state";
 import { setAccount, setChainId } from "./state/wallet";
 import { TConnectInfo } from "./types/state";
@@ -8,6 +9,7 @@ import { setupNetwork } from "./utils/wallet";
 
 const Subscribe = ({ children }: React.PropsWithChildren<unknown>) => {
     const dispatch = useDispatch();
+    const toast = useToast();
 
     useEffect(() => {
         if (window.ethereum && window.ethereum.on) {
@@ -16,15 +18,20 @@ const Subscribe = ({ children }: React.PropsWithChildren<unknown>) => {
                 if (connectInfo.chainId) {
                     if (supportedChainIds[`${Number(connectInfo.chainId)}`]) {
                         dispatch(setChainId(Number(connectInfo.chainId)));
+                        toast.successToast("Connect network.");
                     } else {
                         setupNetwork()
                             .then((result) => {
                                 if (result && result.status != 200) {
-                                    alert(result.msg);
+                                    console.log(result.msg);
+                                    toast.errorToast(result.msg);
+                                } else {
+                                    toast.successToast("Setup network.");
                                 }
                             })
                             .catch((error) => {
                                 console.log(error);
+                                toast.errorToast(error.msg);
                             });
                     }
                 }
