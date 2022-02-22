@@ -9,4 +9,5 @@ export type TConnectInfo = {
 
 export type TNavbarState = {
     isClick: boolean;
+    isOpenWalletModal: boolean;
 }

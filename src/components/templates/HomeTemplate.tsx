@@ -8,6 +8,7 @@ type TProps = {
     headerProps: {
         isClickNavbar: boolean,
         toggleNavbar: () => void,
+        toggleNavbarModal: () => void,
         connectWallet: () => void,
         account: string | null,
         chainId: number | null,
@@ -22,6 +23,7 @@ const HomeTemplate = ({ headerProps }: TProps) => (
         <Navbar
             isClickNavbar={headerProps.isClickNavbar}
             toggleNavbar={headerProps.toggleNavbar}
+            toggleNavbarModal={headerProps.toggleNavbarModal}
             chainId={headerProps.chainId}
             connectWallet={headerProps.connectWallet}
         />

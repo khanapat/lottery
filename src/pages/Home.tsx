@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../state";
 import { setAccount } from "../state/wallet";
-import { toggleClick } from "../state/navbar";
+import { toggleClick, toggleWalletModal } from "../state/navbar";
 
 import HomeTemplate from "../components/templates/HomeTemplate";
 import useToast from "../hooks/useToast";
@@ -34,9 +34,14 @@ const Home = () => {
         }
     };
 
+    const toggleNavbarModal = () => {
+        dispatch(toggleWalletModal());
+    };
+
     const headerProps = {
         isClickNavbar: state.navbar.isClick,
         toggleNavbar: toggleNavbar,
+        toggleNavbarModal: toggleNavbarModal,
         connectWallet: connectWalletHandler,
         account: state.wallet.address,
         chainId: state.wallet.chainId,
