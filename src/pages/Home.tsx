@@ -17,6 +17,8 @@ const Home = () => {
     };
 
     const connectWalletHandler = () => {
+        dispatch(toggleWalletModal());
+
         if (window.ethereum && window.ethereum.request) {
             window.ethereum.request({
                 method: "eth_requestAccounts"
@@ -41,6 +43,7 @@ const Home = () => {
     const headerProps = {
         isClickNavbar: state.navbar.isClick,
         toggleNavbar: toggleNavbar,
+        isOpenWalletModal: state.navbar.isOpenWalletModal,
         toggleNavbarModal: toggleNavbarModal,
         connectWallet: connectWalletHandler,
         account: state.wallet.address,

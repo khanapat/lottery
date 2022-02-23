@@ -1,23 +1,31 @@
 import styled from "styled-components";
+import { provider, walletProvider } from "../../config/constants.ts/wallet";
+import { WalletConnection } from "../atoms";
 
-const WalletModal = () => (
-    <WalletModalStyle className="modal">
-        <div className="modal-content">
-            <div className="modal-header">
-                <h4 className="modal-title">Modal title</h4>
-            </div>
-            <div className="modal-body">
-                This is modal content
-            </div>
-            <div className="modal-footer">
-                <button className="button">Close</button>
-            </div>
-        </div>
-    </WalletModalStyle>
+type TProps = {
+    connectWallet: () => void;
+}
+
+const WalletModal = ({ connectWallet }: TProps) => (
+    <WalStype>
+        {
+            provider.map((provider, index) =>
+                <WalletConnection
+                    key={index}
+                    text={provider}
+                    img={walletProvider[provider]}
+                    onClick={connectWallet}
+                />
+            )
+        }
+    </WalStype>
 );
 
-const WalletModalStyle = styled.div`
-    
+const WalStype = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 `;
 
 export default WalletModal;

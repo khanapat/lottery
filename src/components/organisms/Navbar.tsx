@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { logoPath } from "../../config/constants.ts/network";
 import { Button } from "../atoms";
-import { WalletModal } from "../molecules";
 // import { Address } from "../molecules";
 
 type TProps = {
@@ -10,7 +9,7 @@ type TProps = {
     toggleNavbar: () => void,
     toggleNavbarModal: () => void,
     chainId: number | null,
-    connectWallet: () => void,
+    // connectWallet: () => void,
 }
 
 const Navbar = (props: TProps) => (
@@ -34,7 +33,6 @@ const Navbar = (props: TProps) => (
             </div>
             <Button color="blue" text="Connect Wallet" onClick={props.toggleNavbarModal} />
             {/* <Button color="blue" text="Connect Wallet" onClick={props.connectWallet} /> */}
-            <WalletModal />
         </div>
     </NavStyle>
 );
