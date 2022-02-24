@@ -11,3 +11,7 @@ export type TNavbarState = {
     isClick: boolean;
     isOpenWalletModal: boolean;
 }
+
+export type TTokenState = {
+    balance: string;
+}

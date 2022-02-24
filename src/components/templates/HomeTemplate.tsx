@@ -13,6 +13,7 @@ type TProps = {
         connectWallet: () => void,
         account: string | null,
         chainId: number | null,
+        stableTokenBalance: string,
     }
     bodyProps: {
 
@@ -26,6 +27,7 @@ const HomeTemplate = ({ headerProps }: TProps) => (
             toggleNavbar={headerProps.toggleNavbar}
             toggleNavbarModal={headerProps.toggleNavbarModal}
             chainId={headerProps.chainId}
+            balance={headerProps.stableTokenBalance}
         />
         {/* {headerProps.chainId} */}
         <Address text={headerProps.account} />

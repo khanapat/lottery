@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { logoPath } from "../../config/constants.ts/network";
-import { Button } from "../atoms";
+import { Balance, Button } from "../atoms";
 // import { Address } from "../molecules";
 
 type TProps = {
@@ -9,25 +9,26 @@ type TProps = {
     toggleNavbar: () => void,
     toggleNavbarModal: () => void,
     chainId: number | null,
-    // connectWallet: () => void,
+    balance: string,
 }
 
 const Navbar = (props: TProps) => (
     <NavStyle className="navbar-items">
-        <div>
+        <div className="navbar-menu">
             <img className="navbar-logo" src="/assets/logo.webp" alt="navbar-logo" />
             <div className="menu-icon" onClick={props.toggleNavbar}>
                 <div className={`bar1 ${props.isClickNavbar ? "active" : ""}`} />
                 <div className={`bar2 ${props.isClickNavbar ? "active" : ""}`} />
                 <div className={`bar3 ${props.isClickNavbar ? "active" : ""}`} />
             </div>
-            <ul className="navbar-menu">
+            <ul className="navbar-lists">
                 <li><a href="">bobo</a></li>
                 <li><a href="">bobo</a></li>
                 <li><a href="">bobo</a></li>
             </ul>
         </div>
-        <div>
+        <div className="navbar-network">
+            <Balance amount={props.balance} img="/assets/usdc_logo.png" />
             <div className="network-logo-container">
                 <img className="network-logo" src={`${props.chainId ? logoPath[props.chainId] : logoPath[0]}`} alt="network-logo" />
             </div>
@@ -54,7 +55,7 @@ const NavStyle = styled.nav<TStyle>`
         text-decoration: none;
     }
 
-    div {
+    .navbar-menu {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -66,7 +67,7 @@ const NavStyle = styled.nav<TStyle>`
             cursor: pointer;
         }
 
-        .navbar-menu {
+        .navbar-lists {
             list-style: none;
             display: flex;
             column-gap: 30px;
@@ -74,19 +75,27 @@ const NavStyle = styled.nav<TStyle>`
         }
     }
 
-    .network-logo-container {
-        height: 50px;
-        width: 50px;
-        border: 1px solid rgb(122, 110, 170);
-        border-radius: 50%;
+    .navbar-network {
         display: flex;
+        flex-direction: row;
         align-items: center;
-        justify-content: center;
-        background-color: white;
-    }
-
-    .network-logo {
+        column-gap: 30px;
         height: 100%;
+        
+        .network-logo-container {
+            height: 50px;
+            width: 50px;
+            border: 1px solid rgb(122, 110, 170);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+        }
+
+        .network-logo {
+            height: 100%;
+        }
     }
 
     // toggle

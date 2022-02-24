@@ -5,12 +5,14 @@ import { setAccount } from "../state/wallet";
 import { toggleClick, toggleWalletModal } from "../state/navbar";
 
 import HomeTemplate from "../components/templates/HomeTemplate";
-import useToast from "../hooks/useToast";
+import { useToast, useToken } from "../hooks";
+import { setBalance } from "../state/token";
 
 const Home = () => {
     const state = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
     const toast = useToast();
+    const token = useToken();
 
     const toggleNavbar = () => {
         dispatch(toggleClick());
@@ -40,6 +42,13 @@ const Home = () => {
         dispatch(toggleWalletModal());
     };
 
+    useEffect(() => {
+        (async function () {
+            const balance = await token.getBalance();
+            dispatch(setBalance(balance));
+        })();
+    }, [state.wallet.address]);
+
     const headerProps = {
         isClickNavbar: state.navbar.isClick,
         toggleNavbar: toggleNavbar,
@@ -48,6 +57,7 @@ const Home = () => {
         connectWallet: connectWalletHandler,
         account: state.wallet.address,
         chainId: state.wallet.chainId,
+        stableTokenBalance: state.token.balance,
     };
 
     const bodyProps = {
