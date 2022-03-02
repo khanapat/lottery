@@ -1,8 +1,10 @@
-import React from "react";
+import styled from "styled-components";
 import { Button } from "../atoms";
-import { Address, WalletModal } from "../molecules";
+import { Address, HistoryBar, WalletModal } from "../molecules";
 import { Navbar, Modal } from "../organisms";
 import { ToastContainer } from "react-toastify";
+import { Lottery } from "../../types/graphql";
+import { ApolloError } from "@apollo/client";
 
 type TProps = {
     headerProps: {
@@ -16,36 +18,52 @@ type TProps = {
         stableTokenBalance: string,
     }
     bodyProps: {
-
+        hisLotteries: Lottery[]
+        hisLoading: boolean
+        hisError: ApolloError | undefined
     },
 };
 
-const HomeTemplate = ({ headerProps }: TProps) => (
-    <div>
-        <Navbar
-            isClickNavbar={headerProps.isClickNavbar}
-            toggleNavbar={headerProps.toggleNavbar}
-            toggleNavbarModal={headerProps.toggleNavbarModal}
-            chainId={headerProps.chainId}
-            balance={headerProps.stableTokenBalance}
-        />
-        {/* {headerProps.chainId} */}
-        <Address text={headerProps.account} />
-        {/* <FaRegCopy /> */}
-        <Modal
-            title="Connect Wallet"
-            width={400}
-            isOpen={headerProps.isOpenWalletModal}
-            onClickClose={headerProps.toggleNavbarModal}
-            body={<WalletModal
-                connectWallet={headerProps.connectWallet}
-            />}
-            footer={
-                <p>Haven’t got a crypto wallet yet?</p>
-            }
-        />
+const HomeTemplate = ({ headerProps, bodyProps }: TProps) => (
+    <HomeTemplateStyle>
+        <div className="header">
+            <Navbar
+                isClickNavbar={headerProps.isClickNavbar}
+                toggleNavbar={headerProps.toggleNavbar}
+                toggleNavbarModal={headerProps.toggleNavbarModal}
+                chainId={headerProps.chainId}
+                balance={headerProps.stableTokenBalance}
+            />
+        </div>
+        <div className="body">
+            <Address text={headerProps.account} />
+            <HistoryBar
+                lotteries={bodyProps.hisLotteries}
+            />
+            <Modal
+                title="Connect Wallet"
+                width={400}
+                isOpen={headerProps.isOpenWalletModal}
+                onClickClose={headerProps.toggleNavbarModal}
+                body={<WalletModal
+                    connectWallet={headerProps.connectWallet}
+                />}
+                footer={
+                    <p>Haven’t got a crypto wallet yet?</p>
+                }
+            />
+        </div>
         <ToastContainer />
-    </div>
+    </HomeTemplateStyle>
 );
+
+const HomeTemplateStyle = styled.div`
+    .body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+`;
 
 export default HomeTemplate;

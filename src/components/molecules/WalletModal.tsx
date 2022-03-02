@@ -7,7 +7,7 @@ type TProps = {
 }
 
 const WalletModal = ({ connectWallet }: TProps) => (
-    <WalStype>
+    <WalStyle>
         {
             provider.map((provider, index) =>
                 <WalletConnection
@@ -18,10 +18,10 @@ const WalletModal = ({ connectWallet }: TProps) => (
                 />
             )
         }
-    </WalStype>
+    </WalStyle>
 );
 
-const WalStype = styled.div`
+const WalStyle = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: center;

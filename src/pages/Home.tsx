@@ -7,12 +7,22 @@ import { toggleClick, toggleWalletModal } from "../state/navbar";
 import HomeTemplate from "../components/templates/HomeTemplate";
 import { useToast, useToken } from "../hooks";
 import { setBalance } from "../state/token";
+import { useQuery } from "@apollo/client";
+import { GET_LOTTERIES } from "../apollo/LotteryQueries";
+import { Lotteries } from "../types/graphql";
 
 const Home = () => {
     const state = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
     const toast = useToast();
     const token = useToken();
+    const { loading, error, data: lotteries, refetch } = useQuery<Lotteries>(GET_LOTTERIES,
+        {
+            variables: {
+                account: state.wallet.address,
+            }
+        }
+    );
 
     const toggleNavbar = () => {
         dispatch(toggleClick());
@@ -42,11 +52,26 @@ const Home = () => {
         dispatch(toggleWalletModal());
     };
 
+    // useEffect(() => {
+    //     console.log(lotteries)
+    //     console.log(loading)
+    //     console.log(error)
+    // }, [lotteries]);
+
     useEffect(() => {
         (async function () {
             const balance = await token.getBalance();
             dispatch(setBalance(balance));
         })();
+
+        (async function () {
+            refetch({
+                account: state.wallet.address,
+            });
+        })();
+        console.log(loading)
+        console.log(lotteries);
+
     }, [state.wallet.address]);
 
     const headerProps = {
@@ -61,7 +86,9 @@ const Home = () => {
     };
 
     const bodyProps = {
-
+        hisLotteries: lotteries?.lotteries ? lotteries.lotteries : [],
+        hisLoading: loading,
+        hisError: error,
     };
 
     return (
