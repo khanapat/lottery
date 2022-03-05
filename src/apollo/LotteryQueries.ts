@@ -2,7 +2,7 @@ import { gql } from "@apollo/client"
 
 export const GET_LOTTERIES = gql`
     query GetLotteries($account: Bytes!) {
-        lotteries(owner: $account) {
+        lotteries(where: {owner: $account}) {
             id
             round
             owner

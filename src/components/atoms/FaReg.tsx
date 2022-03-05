@@ -29,9 +29,7 @@ const FaReg = ({ mainText, initToolTipText, finishToolTipText }: TProps) => {
     const [textState, setTextState] = useState<string>(initToolTipText);
 
     useEffect(() => {
-        if (mouseState === STATE.MOUSE_DOWN) {
-            setTextState(finishToolTipText);
-        } else if (mouseState === STATE.MOUSE_LEAVE) {
+        if (mouseState === STATE.MOUSE_LEAVE) {
             setTextState(initToolTipText);
         }
     }, [mouseState])
@@ -42,15 +40,20 @@ const FaReg = ({ mainText, initToolTipText, finishToolTipText }: TProps) => {
                 className="fa-reg"
                 onMouseEnter={() => setMouseState(STATE.MOUSE_ENTER)}
                 onMouseLeave={() => setMouseState(STATE.MOUSE_LEAVE)}
-                onMouseDown={() => setMouseState(STATE.MOUSE_DOWN)}
-                onMouseUp={() => setMouseState(STATE.MOUSE_ENTER)}
+            // onMouseDown={() => setMouseState(STATE.MOUSE_DOWN)}
+            // onMouseUp={() => setMouseState(STATE.MOUSE_ENTER)}
             >
                 {mouseState === STATE.MOUSE_ENTER
-                    ? <FaCopy onClick={() => copyText(mainText)} />
-                    : mouseState === STATE.MOUSE_LEAVE
-                        ? <FaRegCopy />
-                        : <BsCheckLg />
+                    ? <FaCopy onClick={() => {
+                        copyText(mainText);
+                        setTextState(finishToolTipText);
+                    }} />
+                    : <FaRegCopy />
                 }
+
+                {/* <FaCopy onClick={() => {
+                    copyText(mainText);
+                }} /> */}
             </div>
             <div className="tooltip">
                 <span className="tooltiptext">{textState}</span>

@@ -5,7 +5,7 @@ import { setAccount } from "../state/wallet";
 import { toggleClick, toggleWalletModal } from "../state/navbar";
 
 import HomeTemplate from "../components/templates/HomeTemplate";
-import { useToast, useToken } from "../hooks";
+import { useToast, useStableCoin, useGachapong, useExample } from "../hooks";
 import { setBalance } from "../state/token";
 import { useQuery } from "@apollo/client";
 import { GET_LOTTERIES } from "../apollo/LotteryQueries";
@@ -15,7 +15,9 @@ const Home = () => {
     const state = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
     const toast = useToast();
-    const token = useToken();
+    const token = useStableCoin();
+    const { setNumber, subscribeEvent } = useExample();
+
     const { loading, error, data: lotteries, refetch } = useQuery<Lotteries>(GET_LOTTERIES,
         {
             variables: {
@@ -52,6 +54,10 @@ const Home = () => {
         dispatch(toggleWalletModal());
     };
 
+    useEffect(() => {
+        subscribeEvent();
+    }, []);
+
     // useEffect(() => {
     //     console.log(lotteries)
     //     console.log(loading)
@@ -69,8 +75,8 @@ const Home = () => {
                 account: state.wallet.address,
             });
         })();
-        console.log(loading)
-        console.log(lotteries);
+        // console.log(loading)
+        // console.log(lotteries);
 
     }, [state.wallet.address]);
 
@@ -89,6 +95,7 @@ const Home = () => {
         hisLotteries: lotteries?.lotteries ? lotteries.lotteries : [],
         hisLoading: loading,
         hisError: error,
+        setNumber: setNumber,
     };
 
     return (

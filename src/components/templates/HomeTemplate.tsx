@@ -18,9 +18,10 @@ type TProps = {
         stableTokenBalance: string,
     }
     bodyProps: {
-        hisLotteries: Lottery[]
-        hisLoading: boolean
-        hisError: ApolloError | undefined
+        hisLotteries: Lottery[],
+        hisLoading: boolean,
+        hisError: ApolloError | undefined,
+        setNumber: () => void,
     },
 };
 
@@ -37,6 +38,9 @@ const HomeTemplate = ({ headerProps, bodyProps }: TProps) => (
         </div>
         <div className="body">
             <Address text={headerProps.account} />
+
+            <button onClick={bodyProps.setNumber}>Set Number</button>
+
             <HistoryBar
                 lotteries={bodyProps.hisLotteries}
             />
@@ -53,6 +57,7 @@ const HomeTemplate = ({ headerProps, bodyProps }: TProps) => (
                 }
             />
         </div>
+
         <ToastContainer />
     </HomeTemplateStyle>
 );
