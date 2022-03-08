@@ -2,20 +2,20 @@ import React from 'react';
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import Home from './pages/Home';
+import { Home, Bobo } from './pages';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import GlobalCSS from './styles/Global';
-import { ApolloProvider } from '@apollo/client';
-import { client } from './apollo/client';
+// import GlobalCSS from './styles/Global';
 
 function App() {
     return (
-        <React.Fragment>
-            {/* <GlobalCSS /> */}
-            <ApolloProvider client={client}>
-                <Home />
-            </ApolloProvider>
-        </React.Fragment >
+        <BrowserRouter>
+            <Routes>
+                {/* <GlobalCSS /> */}
+                <Route path="/" element={<Home />} />
+                <Route path="/bobo" element={<Bobo />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

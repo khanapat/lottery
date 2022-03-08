@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { logoPath } from "../../config/constants.ts/network";
 import { Balance, Button } from "../atoms";
@@ -22,7 +23,7 @@ const Navbar = (props: TProps) => (
                 <div className={`bar3 ${props.isClickNavbar ? "active" : ""}`} />
             </div>
             <ul className="navbar-lists">
-                <li><a href="">bobo</a></li>
+                <li><Link to="/bobo">bobo</Link></li>
                 <li><a href="">bobo</a></li>
                 <li><a href="">bobo</a></li>
             </ul>

@@ -7,15 +7,19 @@ import reportWebVitals from './reportWebVitals';
 import Subscribe from './Subscribe';
 import { Provider } from 'react-redux';
 import { store } from "./state";
+import { ApolloProvider } from '@apollo/client';
+import { client } from './apollo/client';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <Providers> */}
-    <Provider store={store}>
-      <Subscribe>
-        <App />
-      </Subscribe>
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <Subscribe>
+          <App />
+        </Subscribe>
+      </Provider>
+    </ApolloProvider>
     {/* </Providers> */}
   </React.StrictMode>,
   document.getElementById('root')

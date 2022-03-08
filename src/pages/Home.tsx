@@ -5,7 +5,7 @@ import { setAccount } from "../state/wallet";
 import { toggleClick, toggleWalletModal } from "../state/navbar";
 
 import HomeTemplate from "../components/templates/HomeTemplate";
-import { useToast, useStableCoin, useGachapong, useExample } from "../hooks";
+import { useToast, useStableCoin, useGachapong, useExample, useContract } from "../hooks";
 import { setBalance } from "../state/token";
 import { useQuery } from "@apollo/client";
 import { GET_LOTTERIES } from "../apollo/LotteryQueries";
@@ -16,6 +16,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const toast = useToast();
     const token = useStableCoin();
+    const { getExample } = useContract();
     const { setNumber, subscribeEvent } = useExample();
 
     const { loading, error, data: lotteries, refetch } = useQuery<Lotteries>(GET_LOTTERIES,
@@ -55,6 +56,15 @@ const Home = () => {
     };
 
     useEffect(() => {
+        // const setNumber = getExample().filters.SetNumber();
+        // getExample().queryFilter(setNumber, 25359778)
+        //     .then(result => {
+        //         console.log(result);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
+
         subscribeEvent();
     }, []);
 
