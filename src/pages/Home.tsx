@@ -16,8 +16,7 @@ const Home = () => {
     const dispatch = useDispatch();
     const toast = useToast();
     const token = useStableCoin();
-    const { getExample } = useContract();
-    const { setNumber, subscribeEvent } = useExample();
+    const { setNumber } = useExample();
 
     const { loading, error, data: lotteries, refetch } = useQuery<Lotteries>(GET_LOTTERIES,
         {
@@ -55,18 +54,21 @@ const Home = () => {
         dispatch(toggleWalletModal());
     };
 
-    useEffect(() => {
-        // const setNumber = getExample().filters.SetNumber();
-        // getExample().queryFilter(setNumber, 25359778)
-        //     .then(result => {
-        //         console.log(result);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
+    // useEffect(() => {
+    //     // const setNumber = getExample().filters.SetNumber();
+    //     // getExample().queryFilter(setNumber, 25359778)
+    //     //     .then(result => {
+    //     //         console.log(result);
+    //     //     })
+    //     //     .catch(error => {
+    //     //         console.log(error);
+    //     //     });
 
-        subscribeEvent();
-    }, []);
+    //     subscribeEvent();
+    //     return () => {
+    //         removeEvent();
+    //     };
+    // }, []);
 
     // useEffect(() => {
     //     console.log(lotteries)

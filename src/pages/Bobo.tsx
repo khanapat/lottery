@@ -1,8 +1,8 @@
+import BoboTemplate from "../components/templates/BoboTemplate";
+
 const Bobo = () => {
     return (
-        <div>
-            bobo
-        </div>
+        <BoboTemplate />
     );
 };
 

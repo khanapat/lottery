@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Button } from "../atoms";
 import { Address, HistoryBar, WalletModal } from "../molecules";
 import { Navbar, Modal } from "../organisms";
-import { ToastContainer } from "react-toastify";
 import { Lottery } from "../../types/graphql";
 import { ApolloError } from "@apollo/client";
 
@@ -57,8 +56,6 @@ const HomeTemplate = ({ headerProps, bodyProps }: TProps) => (
                 }
             />
         </div>
-
-        <ToastContainer />
     </HomeTemplateStyle>
 );
 
