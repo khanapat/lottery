@@ -1,6 +1,6 @@
 const BoboTemplate = () => (
     <div>
-        bobo
+        bobo lol
     </div>
 );
 
